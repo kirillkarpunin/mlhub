@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+<a class="header item" href="/datasets/">Главная</a>
+<a class="header active item">{{ dataset.dataset_name }}</a>
+<a class="header right item" href="#">Импорт/Экспорт</a>
+{% endblock %}
+
+{% block content %}
+<div class="ui container padded-container">
+    <h1 class="ui header"> {{ dataset.dataset_name }}</h1>
+    <div class="ui two column grid">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui header">Описание</h2>
+                <p> {{ dataset.dataset_description }}</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui header">Характеристики</h2>
+                <ul>
+                    <li>Тип: CSV</li>
+                    <li>Размер файла: {{ dataset.dataset_size }} байт</li>
+                    <li>Количество записей:</li>
+                    <li>Количество столбцов:</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui container padded-container">
+        <a class="ui secondary button" href="#">Скачать</a>
+        <a class="ui basic secondary button" href="/datasets/edit/{{ dataset.dataset_id }}/">Редактировать</a>
+        <a class="ui negative button" href="#">Удалить</a>
+        <a class="ui right floated button" href="/datasets/">Назад</a>
+    </div>
+
+    <div class="ui divider"></div>
+
+    <canvas id="myChart"></canvas>
+</div>
+{% endblock %}
+
+{% block extra %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'line', // Тип графика (линейный)
+        data: {
+            labels: ['хихоньки', 'хахоньки', 'хихоньки', 'хахоньки', 'хихоньки', 'хахоньки'], // Ось X
+            datasets: [{
+                label: 'Какой-то график', // Название графика
+                data: [65, 59, 80, 81, 56, 55], // Данные для оси Y
+                backgroundColor: 'rgba(0,0,0,0.2)', // Цвет фона
+                borderColor: 'rgb(81,81,81)', // Цвет линии
+                borderWidth: 2 // Толщина линии
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true // Начало оси Y с 0
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

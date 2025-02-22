@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+<a class="header item" href="/datasets/">Главная</a>
+{% if info %}
+<a class="header active item">Редактировать {{ info.dataset_name }}</a>
+{% else %}
+<a class="header active item">Добавить датасет</a>
+{% endif %}
+<a class="header right item" href="#">Импорт/Экспорт</a>
+{% endblock %}
+
+{% block content %}
+<div class="ui text container padded-container">
+    <form class="ui form large" id="dataset-form">
+        {% if info %}
+        <div class="required field">
+            <label>Название</label>
+            <input type="text" name="dataset-name" placeholder="Введите название датасета" value="{{info.dataset_name}}"
+                   required>
+        </div>
+        <div class="field">
+            <label>Описание</label>
+            <textarea name="dataset-description"
+                      placeholder="Введите описание датасета">{{info.dataset_description}}</textarea>
+        </div>
+        {% else %}
+        <div class="required field">
+            <label>Название</label>
+            <input type="text" name="dataset-name" placeholder="Введите название датасета" required>
+        </div>
+        <div class="field">
+            <label>Описание</label>
+            <textarea name="dataset-description" placeholder="Введите описание датасета"></textarea>
+        </div>
+        <div class="ui grid">
+            <div class="twelve wide column">
+                <div class="field">
+                    <label>Данные</label>
+                    <textarea name="dataset-data" placeholder="Введите данные датасета" required></textarea>
+                </div>
+            </div>
+            <div class="three wide column right floated">
+                <div class="field">
+                    <label>Тип файла</label>
+                    <select class="ui fluid dropdown" name="dataset-type">
+                        <option value="csv" selected>CSV</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+    </form>
+    <div class="ui container padded-container">
+        <button class="ui secondary button" form="dataset-form">Сохранить</button>
+        {% if info %}
+        <a class="ui button right floated" href="/datasets/{{ info.dataset_id }}/">Отмена</a>
+        {% else %}
+        <a class="ui button right floated" href="/datasets/">Отмена</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra %}
+{% if info %}
+{% else %}
+<script src="{{ url_for('static', filename='scripts/addDatasetScript.js') }}"></script>
+{% endif %}
+{% endblock %}
