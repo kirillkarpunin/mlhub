@@ -36,7 +36,10 @@ class DatasetController:
 
         form_values: DatasetFormValues = DatasetFormValues(dataset_name, dataset_description, dataset_data,
                                                            dataset_type)
-        DatasetService.add_dataset(form_values)
+
+        match dataset_type:
+            case 'csv':
+                DatasetService.add_csv_dataset(form_values)
 
         response: Response = make_response()
         response.headers['redirect'] = '/datasets/'
