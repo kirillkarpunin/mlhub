@@ -13,7 +13,6 @@ class DatasetController:
         else:
             return '404'
 
-
     @staticmethod
     def render_dataset(dataset_id) -> str:
         dataset: dict = DatasetService.get_dataset(dataset_id)
@@ -24,18 +23,19 @@ class DatasetController:
 
     @staticmethod
     def render_add_dataset() -> str:
-        return render_template('dataset_info.html')
+        return render_template('dataset_properties.html')
 
     @staticmethod
     def add_dataset(request: Request) -> Response:
-        form_data: dict = request.get_json() # или это не dict, я не ебу если честно :(((((
+        form_data: dict = request.get_json()  # или это не dict, я не ебу если честно :(((((
 
         dataset_name: str = form_data['dataset-name']
         dataset_description: str = form_data['dataset-description']
         dataset_data: str = form_data['dataset-data']
         dataset_type: str = form_data['dataset-type']
 
-        form_values: DatasetFormValues = DatasetFormValues(dataset_name, dataset_description, dataset_data, dataset_type)
+        form_values: DatasetFormValues = DatasetFormValues(dataset_name, dataset_description, dataset_data,
+                                                           dataset_type)
         DatasetService.add_dataset(form_values)
 
         response: Response = make_response()

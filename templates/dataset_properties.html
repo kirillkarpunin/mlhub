@@ -35,9 +35,13 @@
         </div>
         <div class="ui grid">
             <div class="twelve wide column">
-                <div class="field">
+                <div id="dataset-data-field" class="field">
                     <label>Данные</label>
-                    <textarea name="dataset-data" placeholder="Введите данные датасета" required></textarea>
+                    <textarea id="dataset-data-input" name="dataset-data" placeholder="Введите данные датасета"
+                              required></textarea>
+                    <div id="dataset-field-error" class="ui basic red pointing prompt label"
+                         style="display: none;">Неправильный формат данных
+                    </div>
                 </div>
             </div>
             <div class="three wide column right floated">
