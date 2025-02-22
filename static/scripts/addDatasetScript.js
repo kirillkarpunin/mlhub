@@ -18,7 +18,7 @@ datasetForm.addEventListener('submit', (e) => {
 
     let isValid = false
     switch (type) {
-        case 'csv':
+        case 'CSV':
             isValid = csvValidation(data['dataset-data'])
             break;
     }

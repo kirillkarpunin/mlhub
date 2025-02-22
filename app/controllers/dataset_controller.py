@@ -1,13 +1,14 @@
 from flask import render_template, Request, Response, make_response
 
 from app.models.DatasetFormValues import DatasetFormValues
+from app.models.DatasetInfo import DatasetInfo
 from app.services.dataset_service import DatasetService
 
 
 class DatasetController:
     @staticmethod
     def render_all_datasets() -> str:
-        all_datasets_brief: list = DatasetService.get_all_datasets_brief()
+        all_datasets_brief: list = DatasetService.get_all_datasets_brief() # лист брифов!!!!!!!!
         if all_datasets_brief is not None:
             return render_template('all_datasets.html', datasets_brief=all_datasets_brief)
         else:
@@ -15,9 +16,9 @@ class DatasetController:
 
     @staticmethod
     def render_dataset(dataset_id) -> str:
-        dataset: dict = DatasetService.get_dataset(dataset_id)
-        if dataset is not None:
-            return render_template('one_dataset.html', dataset=dataset)
+        dataset_info: DatasetInfo = DatasetService.get_dataset(dataset_id)
+        if dataset_info is not None:
+            return render_template('one_dataset.html', dataset_info=dataset_info)
         else:
             return '404'
 
@@ -38,7 +39,7 @@ class DatasetController:
                                                            dataset_type)
 
         match dataset_type:
-            case 'csv':
+            case 'CSV':
                 DatasetService.add_csv_dataset(form_values)
 
         response: Response = make_response()

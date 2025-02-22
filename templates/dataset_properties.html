@@ -17,21 +17,21 @@
         <div class="required field">
             <label>Название</label>
             <input type="text" name="dataset-name" placeholder="Введите название датасета" value="{{info.dataset_name}}"
-                   required>
+                   maxlength="50" required>
         </div>
         <div class="field">
             <label>Описание</label>
-            <textarea name="dataset-description"
+            <textarea name="dataset-description" maxlength="250"
                       placeholder="Введите описание датасета">{{info.dataset_description}}</textarea>
         </div>
         {% else %}
         <div class="required field">
             <label>Название</label>
-            <input type="text" name="dataset-name" placeholder="Введите название датасета" required>
+            <input type="text" name="dataset-name" placeholder="Введите название датасета" maxlength="50" required>
         </div>
         <div class="field">
             <label>Описание</label>
-            <textarea name="dataset-description" placeholder="Введите описание датасета"></textarea>
+            <textarea name="dataset-description" maxlength="250" placeholder="Введите описание датасета"></textarea>
         </div>
         <div class="ui grid">
             <div class="twelve wide column">
@@ -48,7 +48,7 @@
                 <div class="field">
                     <label>Тип файла</label>
                     <select class="ui fluid dropdown" name="dataset-type">
-                        <option value="csv" selected>CSV</option>
+                        <option value="CSV" selected>CSV</option>
                     </select>
                 </div>
             </div>

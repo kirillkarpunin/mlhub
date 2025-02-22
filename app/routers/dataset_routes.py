@@ -21,9 +21,3 @@ def add_dataset() -> str:  # Any
 @bp.route('/datasets/<dataset_id>/', methods=['GET'])
 def get_dataset(dataset_id) -> str:  # Any надо потом сделать
     return DatasetController.render_dataset(dataset_id)
-
-
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-@bp.route('/<path>', methods=['GET'])
-def get_404(path) -> str:  # Any надо потом сделать
-    return f'Страницы {path} не существует'
