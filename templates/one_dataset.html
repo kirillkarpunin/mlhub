@@ -13,7 +13,11 @@
         <div class="column">
             <div class="ui segment">
                 <div class="ui header">Описание</div>
+                {% if dataset_info.dataset_description != '' %}
                 <p>{{ dataset_info.dataset_description }}</p>
+                {% else %}
+                <p>(Без описания)</p>
+                {% endif %}
             </div>
         </div>
         <div class="column">
@@ -48,7 +52,7 @@
                 <div id="chart{{ loop.index }}"></div>
                 {% if chart_data.column_type == 'object' %}
                 <p>Самый частовстречаемый элемент: {{ chart_data.column_most_common }}</p>
-                <p>Встречается {{ chart_data.column_most_common_count }} раз</p>
+                <p>Встречается {{ chart_data.column_most_common_count }} раз(а)</p>
                 {% endif %}
             </div>
         </div>
@@ -64,6 +68,7 @@
     const data{{ loop.index }} = [{
         y: {{ chart_data.column_values | safe }},
         type: {% if chart_data.column_type == 'numeric' %}'box'{% else %}'histogram'{% endif %},
+        name: '',
         marker: {
             color: 'rgb(81,81,81)'
         }
