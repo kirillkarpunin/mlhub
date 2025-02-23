@@ -56,6 +56,6 @@ class DatasetRepository:
     @staticmethod
     def add_dataset(dataset: Dataset):
         db.append(json.dumps(dataset.to_dict()))
-        with open('output.json', 'w') as file:
-            json.dump(dataset.to_dict(), file, indent=4)
-        print(json.dumps(dataset.to_dict()))
+        # with open('output.json', 'w') as file:
+        #     json.dump(dataset.to_dict(), file, indent=4)
+        # print(json.dumps(dataset.to_dict()))

@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="ui text container padded-container">
-    <form class="ui form large" id="dataset-form">
+    <form class="ui form large" id="dataset-form" autocomplete="off">
         {% if info %}
         <div class="required field">
             <label>Название</label>
@@ -35,7 +35,7 @@
         </div>
         <div class="ui grid">
             <div class="twelve wide column">
-                <div id="dataset-data-field" class="field">
+                <div id="dataset-data-field" class="required field">
                     <label>Данные</label>
                     <textarea id="dataset-data-input" name="dataset-data" placeholder="Введите данные датасета"
                               required></textarea>
@@ -53,7 +53,6 @@
                 </div>
             </div>
         </div>
-
         {% endif %}
     </form>
     <div class="ui container padded-container">
