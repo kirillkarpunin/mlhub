@@ -2,8 +2,8 @@
 
 {% block menu %}
 <a class="header item" href="/datasets/">Главная</a>
-{% if info %}
-<a class="header active item">Редактировать {{ info.dataset_name }}</a>
+{% if dataset_brief %}
+<a class="header active item">Редактировать {{ dataset_brief.dataset_name }}</a>
 {% else %}
 <a class="header active item">Добавить датасет</a>
 {% endif %}
@@ -13,16 +13,16 @@
 {% block content %}
 <div class="ui text container padded-container">
     <form class="ui form large" id="dataset-form" autocomplete="off">
-        {% if info %}
+        {% if dataset_brief %}
         <div class="required field">
             <label>Название</label>
-            <input type="text" name="dataset-name" placeholder="Введите название датасета" value="{{info.dataset_name}}"
+            <input type="text" name="dataset-name" placeholder="Введите название датасета" value="{{dataset_brief.dataset_name}}"
                    maxlength="50" required>
         </div>
         <div class="field">
             <label>Описание</label>
             <textarea name="dataset-description" maxlength="250"
-                      placeholder="Введите описание датасета">{{info.dataset_description}}</textarea>
+                      placeholder="Введите описание датасета">{{dataset_brief.dataset_description}}</textarea>
         </div>
         {% else %}
         <div class="required field">
@@ -57,8 +57,8 @@
     </form>
     <div class="ui container padded-container">
         <button class="ui secondary button" form="dataset-form">Сохранить</button>
-        {% if info %}
-        <a class="ui button right floated" href="/datasets/{{ info.dataset_id }}/">Отмена</a>
+        {% if dataset_brief %}
+        <a class="ui button right floated" href="/datasets/{{ dataset_brief.dataset_id }}/">Отмена</a>
         {% else %}
         <a class="ui button right floated" href="/datasets/">Отмена</a>
         {% endif %}
@@ -67,7 +67,7 @@
 {% endblock %}
 
 {% block extra %}
-{% if info %}
+{% if dataset_brief %}
 {% else %}
 <script src="{{ url_for('static', filename='scripts/addDatasetScript.js') }}"></script>
 {% endif %}

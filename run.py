@@ -1,3 +1,7 @@
+"""
+Создает сущность Flask и запускает ее. Добавляет к ней пути с помощью blueprint.
+"""
+
 from flask import Flask
 
 from app.routers import dataset_routes

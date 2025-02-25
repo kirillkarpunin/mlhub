@@ -1,3 +1,7 @@
+"""
+Структура для хранения данных датасета с CSV данными.
+"""
+
 import json
 from io import StringIO
 
@@ -9,6 +13,10 @@ from app.models.VisualisationDataCSV import VisualisationDataCSV
 
 
 class DatasetCSV(Dataset):
+    """
+    Структура для хранения данных датасета с CSV данными.
+    """
+
     def __init__(self, form_values: DatasetFormValues):
         super().__init__(form_values)
 
@@ -23,7 +31,10 @@ class DatasetCSV(Dataset):
 
         self.visualisation_data = VisualisationDataCSV(df)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
+        """
+        Метод для представления объекта класса в виде словаря.
+        """
         return {
             'dataset_name': self.dataset_name,
             'dataset_description': self.dataset_description,

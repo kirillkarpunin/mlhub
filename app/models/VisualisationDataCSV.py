@@ -1,9 +1,15 @@
+"""
+Структура для хранения данных для визуализации датасета.
+"""
 import pandas as pd
 
 
 class VisualisationDataCSV:
+    """
+    Структура для хранения данных для визуализации датасета.
+    """
     def __init__(self, df: pd.DataFrame):
-        self.data = []
+        self.data: list = []
 
         for column in df.columns:
             column_data = {
@@ -12,7 +18,7 @@ class VisualisationDataCSV:
 
             if pd.api.types.is_numeric_dtype(df[column]):
                 column_data['column_type'] = 'numeric'
-                column_data['column_values'] = df[column].astype(float).tolist()
+                column_data['column_values'] = df[column].astype(str).tolist()
             else:
                 column_data['column_type'] = 'object'
                 column_data['column_values'] = df[column].astype(str).tolist()
@@ -22,9 +28,12 @@ class VisualisationDataCSV:
                 # column_data['column_values'] = value_counts.values.astype(int).tolist()
 
                 column_data['column_most_common'] = str(value_counts.idxmax())
-                column_data['column_most_common_count'] = int(value_counts.max())
+                column_data['column_most_common_count'] = str(value_counts.max())
 
             self.data.append(column_data)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
+        """
+        Метод для представления объекта класса в виде словаря.
+        """
         return self.__dict__

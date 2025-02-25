@@ -1,4 +1,10 @@
+"""
+Содержит репозитории приложения. Репозиторий напрямую работает с БД - добавляет, изменяет, удаляет и ищет записи в БД.
+Необходимо полностью переделать, так как на данный момент вместо MongoDB используется локальный массив db.
+"""
+
 import json
+from typing import List, Optional
 
 from app.models.Dataset import Dataset
 from app.models.DatasetBrief import DatasetBrief
@@ -18,24 +24,55 @@ db = [
 
 
 class DatasetRepository:
+    """
+    Класс-репозиторий для данных, связанных с датасетами.
+    """
+
     @staticmethod
-    def get_all_datasets_brief() -> list:  # Any он еще none может вернуть
-        briefs: list = []
+    def get_all_datasets_brief() -> List[DatasetBrief]:
+        """
+        Возвращает список Brief'ов всех датасетов в БД. Если БД пустая, то возвращается пустой список.
+        """
+        briefs: List[DatasetBrief] = []
         for index, dataset_str in enumerate(db):
             dataset: dict = json.loads(dataset_str)
 
             brief: DatasetBrief = DatasetBrief(
-                index,
+                str(index),
                 dataset['dataset_name'],
                 dataset['dataset_description'],
                 dataset['dataset_type'],
                 dataset['dataset_size']
             )
             briefs.append(brief)
+
         return briefs
 
     @staticmethod
-    def get_dataset(dataset_id) -> dict:  # Any мб none
+    def get_dataset_brief(dataset_id: str) -> Optional[DatasetBrief]:
+        """
+        Возвращает объект Brief для датасета с индексом dataset_id. Если датасета с индексом dataset_id нет, то возвращает None.
+        """
+        if int(dataset_id) >= len(db):
+            return None
+
+        dataset: dict = json.loads(db[int(dataset_id)])
+
+        brief: DatasetBrief = DatasetBrief(
+            dataset_id,
+            dataset['dataset_name'],
+            dataset['dataset_description'],
+            dataset['dataset_type'],
+            dataset['dataset_size']
+        )
+
+        return brief
+
+    @staticmethod
+    def get_dataset(dataset_id: str) -> Optional[DatasetInfo]:
+        """
+        Возвращает объект Info для датасета с индексом dataset_id. Если датасета с индексом dataset_id нет, то возвращает None.
+        """
         if int(dataset_id) >= len(db):
             return None
 
@@ -55,6 +92,9 @@ class DatasetRepository:
 
     @staticmethod
     def add_dataset(dataset: Dataset):
+        """
+        Добавляет датасет в БД.
+        """
         db.append(json.dumps(dataset.to_dict()))
         # with open('output.json', 'w') as file:
         #     json.dump(dataset.to_dict(), file, indent=4)

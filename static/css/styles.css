@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 0;
+    width: 0;
 }
 
 .logo {
@@ -18,6 +18,13 @@
     padding-top: 1em;
 }
 
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+}
+
 .searchbar {
     width: 100%;
 }
@@ -30,4 +37,12 @@
 .ui.form textarea:focus,
 .ui.form select:focus {
     border-color: #212121 !important;
+}
+
+.error-message {
+    font-size: 4rem;
+    margin-top: 4rem;
+    font-family: monospace;
+    letter-spacing: 5px;
+    color: #D01919;
 }
